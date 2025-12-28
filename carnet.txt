@@ -1,0 +1,44 @@
+objectif: Mise en place d'une reseau social( tout au moins quelque chose qui y ressemble)
+Fonctionnalite primaire : Navigation(Scroll de post contenant photo video); suivre des utilisateurs; messagerie; notification; appel(si possible appel video); 
+
+
+les acteurs :
+les utilisateurs
+
+que peut faire un utilisateur:
+-ladministratrateur peut tout faire 
+-s'inscrire/se connecter
+-voir les publications
+-faire des publications
+-commenter, like,suivre un autre utilisateurs
+-
+
+
+les tables eventuelle:
+
+-utilisateurs
+-post
+-medias(photos et videos des poste et photos de profile)
+-commentaires
+-likes
+
+
+
+ *********************************************************************************************************
+
+Users (id, nom, prenom, email, password, username,role, date_naissance, date_inscription, timestamps)
+Type_medias (id, nom, timestamps)
+Medias (id, chemin, type_media_id, timestamps)
+Posts (id, contenu, created_at, media_id, auteur_id, timestamps)
+Comments (id, texte, created_at, post_id, auteur_id, timestamps)
+Follows (id, follower_id, followed_id, created_at, timestamps)
+Notifications (id, type, data, read_at, user_id, timestamps)
+Messages (id, sender_id, receiver_id, contenu, created_at, read_at, timestamps)
+Tags (id, nom unique, timestamps)
+Post_tags (post_id, tag_id, timestamps)
+Reactions (id, nom, timestamps)
+Post_reactions (id, user_id, post_id, reaction_id, timestamps, unique(user_id, post_id))
+Comment_reactions (id, user_id, comment_id, reaction_id, timestamps, unique(user_id, comment_id))
+Langues(id, code, nom, local, direction)
+Post_translations(id,langue_id, contenu, post_id)
+Comment_translations(id, langue_id, contenu, comment_id)
