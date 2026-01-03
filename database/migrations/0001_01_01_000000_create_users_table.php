@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->date('date_naissance');
-            $table->date('date_inscription');
+            $table->date('date_inscription')->default(now());
             $table->string('role')->default('user');
             $table->rememberToken();
             $table->timestamps();

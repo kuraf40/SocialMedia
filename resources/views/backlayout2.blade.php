@@ -23,6 +23,10 @@
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ URL::asset('backend/2/assets/icons/bootstrap-icons.css') }}">
+
+
     
     <!-- Title -->
     <title>Dashboard - Modern Bootstrap Admin</title>
@@ -171,7 +175,7 @@
                 <nav class="sidebar-nav">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="./index.html">
+                            <a class="nav-link active" href="{{route('dashboard')}}">
                                 <i class="bi bi-speedometer2"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -186,98 +190,98 @@
                             <div class="collapse" id="elementsSubmenu">
                                 <ul class="nav nav-submenu">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements.html">
-                                            <i class="bi bi-grid"></i>
+                                        <a class="nav-link" href="{{ route('users.index') }}">
+                                            <i class="bi bi-people"></i>
                                             <span>Users</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-buttons.html">
-                                            <i class="bi bi-square"></i>
+                                        <a class="nav-link" href="{{ route('type_medias.index') }}">
+                                            <i class="bi bi-collection"></i>
                                             <span>Type_medias</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-alerts.html">
-                                            <i class="bi bi-exclamation-triangle"></i>
+                                        <a class="nav-link" href="{{route('medias.index')}}">
+                                            <i class="bi bi-image"></i>
                                             <span>Medias</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-badges.html">
-                                            <i class="bi bi-award"></i>
+                                        <a class="nav-link" href="{{ route('posts.index') }}">
+                                            <i class="bi bi-journal-text"></i>
                                             <span>Posts</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-cards.html">
-                                            <i class="bi bi-card-text"></i>
+                                        <a class="nav-link" href="{{ route('comments.index') }}">
+                                            <i class="bi bi-chat-dots"></i>
                                             <span>Comments</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-modals.html">
-                                            <i class="bi bi-window"></i>
+                                        <a class="nav-link" href="{{ route('follows.index') }}">
+                                            <i class="bi bi-person-plus"></i>
                                             <span>Follows</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-forms.html">
-                                            <i class="bi bi-ui-checks"></i>
+                                        <a class="nav-link" href="{{ route('notifications.index') }}">
+                                            <i class="bi bi-bell"></i>
                                             <span>Notifications</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('messages.index') }}">
+                                            <i class="bi bi-envelope"></i>
                                             <span>Messages</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('tags.index') }}">
+                                            <i class="bi bi-tag"></i>
                                             <span>Tags</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('post_tags.index') }}">
+                                            <i class="bi bi-tags"></i>
                                             <span>Post_tags</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('reactions.index') }}">
+                                            <i class="bi bi-emoji-smile"></i>
                                             <span>Reactions</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('post_reactions.index') }}">
+                                            <i class="bi bi-hand-thumbs-up"></i>
                                             <span>Post_reactions</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('comment_reactions.index') }}">
+                                            <i class="bi bi-hand-thumbs-up"></i>
                                             <span>Comment_reactions</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('langues.index') }}">
+                                            <i class="bi bi-translate"></i>
                                             <span>Langues</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('post_translations.index') }}">
+                                            <i class="bi bi-journal-check"></i>
                                             <span>Post_translations</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./elements-tables.html">
-                                            <i class="bi bi-table"></i>
+                                        <a class="nav-link" href="{{ route('comment_translations.index') }}">
+                                            <i class="bi bi-journal-check"></i>
                                             <span>Comment_translations</span>
                                         </a>
                                     </li>
@@ -285,7 +289,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./analytics.html">
+                            <a class="nav-link" href="{{URL::asset('backend/2/analytics.html')}}">
                                 <i class="bi bi-graph-up"></i>
                                 <span>Analytics</span>
                             </a>
@@ -435,17 +439,21 @@
         </button>
 
         <!-- Main Content -->
-        @yield('content')
+        <main class="admin-main">
+          @yield('content')
+        </main>
+
+      
 
         <!-- Footer -->
         <footer class="admin-footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <p class="mb-0 text-muted">© 2025 Modern Bootstrap Admin Template</p>
+                        <p class="mb-0 text-muted"></p>
                     </div>
                     <div class="col-md-6 text-md-end">
-                        <p class="mb-0 text-muted">Built with Bootstrap 5.3.7</p>
+                        <p class="mb-0 text-muted"></p>
                     </div>
                 </div>
             </div>

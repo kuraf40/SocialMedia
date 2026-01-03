@@ -11,7 +11,7 @@ class Comment_translationsController extends Controller
      */
     public function index()
     {
-        //
+        return view('comment_translations.index');
     }
 
     /**
