@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostsController extends Controller
 {
@@ -11,7 +12,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -19,7 +21,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -27,7 +29,13 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'contenu' => 'required|string',
+            'auteur_id' => 'required|integer|exists:users,id',
+            'media_id' => 'required|integer|exists:medias,id'
+        ]);
+        $post = Post::create($validated);
+        return redirect()->route('posts.index', $post->id)->with('success', 'Post créé avec succès.');
     }
 
     /**
@@ -35,7 +43,8 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -43,7 +52,8 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -51,7 +61,14 @@ class PostsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $validated = $request->validate([
+        'contenu' => 'required|string',
+        'auteur_id' => 'required|integer|exists:users,id',
+        'media_id' => 'required|integer|exists:medias,id'
+       ]);
+       $post = Post::findOrFail($id);
+       $post->update($validated);
+       return redirect()->route('posts.index', $post->id)->with('success', 'Post mis à jour avec succès.');
     }
 
     /**
@@ -59,6 +76,8 @@ class PostsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('posts.index')->with('success', 'Post supprimé avec succès.');
     }
 }

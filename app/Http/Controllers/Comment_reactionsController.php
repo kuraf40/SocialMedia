@@ -11,7 +11,7 @@ class Comment_reactionsController extends Controller
      */
     public function index()
     {
-        //
+        return view('comment_reactions.index');
     }
 
     /**

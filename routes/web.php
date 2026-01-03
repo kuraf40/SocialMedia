@@ -44,3 +44,7 @@ Route::resource('langues', LanguesController::class);
 Route::resource('post_translations', Post_translationsController::class);
 Route::resource('comment_translations', Comment_translationsController::class);
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+

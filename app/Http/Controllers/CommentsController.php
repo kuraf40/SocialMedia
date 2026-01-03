@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class CommentsController extends Controller
 {
@@ -11,7 +12,8 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return view('comments.index', compact('comments'));
     }
 
     /**
@@ -19,7 +21,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('comments.create');
     }
 
     /**
@@ -27,7 +29,13 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'texte' => 'required|string',
+            'auteur_id' => 'required|integer|exists:users,id',
+            'post_id' => 'required|integer|exists:posts,id'
+        ]);
+        $comment = Comment::create($validated);
+        return redirect()->route('comments.index', $comment->id)->with('success', 'Commentaire créé avec succès.');
     }
 
     /**
@@ -35,7 +43,8 @@ class CommentsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        return view('comments.show', compact('comment'));
     }
 
     /**
@@ -43,7 +52,8 @@ class CommentsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+      return view('comments.edit', compact('comment'));
     }
 
     /**
@@ -51,7 +61,15 @@ class CommentsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'texte' => 'required|string',
+            'auteur_id' => 'required|integer|exists:users,id',
+            'post_id' => 'required|integer|exists:posts,id'
+        ]);
+
+        $comment = Comment::findOrFail($id);
+        $comment->update($validated);
+        return redirect()->route('comments.index', $comment->id)->with('success', 'Commentaire mis à jour avec succès.');
     }
 
     /**
@@ -59,6 +77,8 @@ class CommentsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        return redirect()->route('comments.index')->with('success', 'Commentaire supprimé avec succès.');
     }
 }
