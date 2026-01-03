@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Langue;
 
 class LanguesController extends Controller
 {
@@ -11,7 +12,8 @@ class LanguesController extends Controller
      */
     public function index()
     {
-        //
+        $langues = Langue::all();
+        return view('langues.index', compact('langues'));
     }
 
     /**
@@ -19,7 +21,7 @@ class LanguesController extends Controller
      */
     public function create()
     {
-        //
+        return view('langues.create');
     }
 
     /**
@@ -27,7 +29,14 @@ class LanguesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'code' => 'required|string|max:10',
+            'nom' => 'required|string|max:255',
+            'locale' => 'required|string|max:10',
+            'direction' => 'required|in:ltr,rtl'
+        ]);
+        $langue = Langue::create($validated);
+        return redirect()->route('langues.index', $langue->id)->with('success', 'Langue créée avec succès.');
     }
 
     /**
@@ -35,7 +44,8 @@ class LanguesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $langue = Langue::findOrFail($id);
+        return view('langues.show', compact('langue'));
     }
 
     /**
@@ -43,7 +53,8 @@ class LanguesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $langue = Langue::findOrFail($id);
+        return view('langues.edit', compact('langue'));
     }
 
     /**
@@ -51,7 +62,15 @@ class LanguesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'code' => 'required|string|max:10',
+            'nom' => 'required|string|max:255',
+            'locale' => 'required|string|max:10',
+            'direction' => 'required|in:ltr,rtl'
+        ]);
+        $langue = Langue::findOrFail($id);
+        $langue->update($validated);
+        return redirect()->route('langues.index', $langue->id)->with('success', 'Langue mise à jour avec succès.');
     }
 
     /**
@@ -59,6 +78,8 @@ class LanguesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $langue = Langue::findOrFail($id);
+        $langue->delete();
+        return redirect()->route('langues.index')->with('success', 'Langue supprimée avec succès.');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Notification;
 
 class NotificationsController extends Controller
 {
@@ -11,7 +12,8 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Notification::all();
+        return view('notifications.index', compact('notifications'));
     }
 
     /**
@@ -19,7 +21,7 @@ class NotificationsController extends Controller
      */
     public function create()
     {
-        //
+        return view('notifications.create');
     }
 
     /**
@@ -27,7 +29,14 @@ class NotificationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'type' => 'required|string|max:255',
+            'data' => 'required|json',
+            'read_at' => 'nullable|date',
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+        $notification = Notification::create($validated);
+        return redirect()->route('notifications.index', $notification->id)->with('success', 'Notification créée avec succès.');
     }
 
     /**
@@ -35,7 +44,8 @@ class NotificationsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $notification = Notification::findOrFail($id);
+        return view('notifications.show', compact('notification'));
     }
 
     /**
@@ -43,7 +53,8 @@ class NotificationsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $notification = Notification::findOrFail($id);
+        return view('notifications.edit', compact('notification'));
     }
 
     /**
@@ -51,7 +62,18 @@ class NotificationsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'type' => 'required|string|max:255',
+            'titre' => 'required|string|max:255',
+            'contenu' => 'required|string',
+            'lien' => 'nullable|string|max:255',
+            'read_at' => 'nullable|date',
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+        $data = json_encode([ 'title' => $validated['titre'], 'message' => $validated['contenu'], 'url' => $validated['lien'] ?? null, ]);
+        $notification = Notification::findOrFail($id);
+        $notification->update($validated);
+        return redirect()->route('notifications.index', $notification->id)->with('success', 'Notification mise à jour avec succès.');
     }
 
     /**
@@ -59,6 +81,8 @@ class NotificationsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $notification = Notification::findOrFail($id);
+        $notification->delete();
+        return redirect()->route('notifications.index')->with('success', 'Notification supprimée avec succès.');
     }
 }
