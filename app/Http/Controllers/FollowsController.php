@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Follow;
 
 class FollowsController extends Controller
 {
@@ -11,7 +12,8 @@ class FollowsController extends Controller
      */
     public function index()
     {
-        //
+        $follows = Follow::all();
+        return view('Follows.index', compact('follows'));
     }
 
     /**
@@ -19,7 +21,7 @@ class FollowsController extends Controller
      */
     public function create()
     {
-        //
+        return view('follows.create');
     }
 
     /**
@@ -27,7 +29,12 @@ class FollowsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'follower_id' => 'required|integer|exists:users,id',
+            'followed_id' => 'required|integer|exists:users,id'
+        ]);
+        $follow = Follow::create($validated);
+        return redirect()->route('follows.index', $follow->id)->with('success', 'Follow created successfully.');
     }
 
     /**
@@ -35,7 +42,8 @@ class FollowsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $follow = Follow::findOrFail($id);
+        return view('follows.show', compact('follow'));
     }
 
     /**
@@ -43,7 +51,8 @@ class FollowsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $follow = Follow::findOrFail($id);
+        return view('follows.edit', compact('follow'));
     }
 
     /**
@@ -51,7 +60,13 @@ class FollowsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'follower_id' => 'required|integer|exists:users,id',
+            'followed_id' => 'required|integer|exists:users,id'
+        ]);
+        $follow = Follow::findOrFail($id);
+        $follow->update($validated);
+        return redirect()->route('follows.index', $follow->id)->with('success', 'Follow updated successfully.');
     }
 
     /**
@@ -59,6 +74,8 @@ class FollowsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $follow = Follow::findOrFail($id);
+        $follow->delete();
+        return redirect()->route('follows.index')->with('success', 'Follow deleted successfully.');
     }
 }

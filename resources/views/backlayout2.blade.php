@@ -41,6 +41,15 @@
   <script type="module" crossorigin src="{{URL::asset('backend/2/assets/vendor-ui-DjYv-mAO.js')}}"></script>
   <script type="module" crossorigin src="{{URL::asset('backend/2/assets/main-BHbn44Op.js')}}"></script>
   <link rel="stylesheet" crossorigin href="{{URL::asset('backend/2/assets/main-QD_VOj1Y.css')}}">
+
+
+  <!-- jQuery -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <!-- DataTables -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+ <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
 </head>
 
 <body data-page="dashboard" class="admin-layout">

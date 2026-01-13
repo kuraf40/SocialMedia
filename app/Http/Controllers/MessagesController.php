@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Message;
 
 class MessagesController extends Controller
 {
@@ -11,7 +12,8 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::all();
+        return view('messages.index', compact('messages'));
     }
 
     /**
@@ -19,7 +21,7 @@ class MessagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('messages.create');
     }
 
     /**
@@ -27,7 +29,15 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'sender_id' => 'required|integer|exists:users,id',
+            'receiver_id' => 'required|integer|exists:users,id',
+            'contenu' => 'required|string',
+            'created_at' => 'date',
+            'read_at' => 'nullable|date'
+        ]);
+        $message = Message::create($validated);
+        return redirect()->route('messages.index', $message->id)->with('success', 'Message créé avec succès.');
     }
 
     /**
@@ -35,7 +45,8 @@ class MessagesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $message = Message::FindOrFail($id);
+        return view('messages.show', compact('message'));
     }
 
     /**
@@ -43,7 +54,8 @@ class MessagesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $message = Message::FindOrFail($id);
+        return view('messages.edit', compact('message'));
     }
 
     /**
@@ -51,7 +63,17 @@ class MessagesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'sender_id' => 'required|integer|exists:users,id',
+            'receiver_id' => 'required|integer|exists:users,id',
+            'contenu' => 'required|string',
+            'created_at' => 'required|date',
+            'read_at' => 'nullable|date'
+
+        ]);
+        $message = Message::FindOrFail($id);
+        $message->update($validated);
+        return redirect()->route('messages.index', $message->id)->with('success', 'Message updated successfully.');
     }
 
     /**
@@ -59,6 +81,8 @@ class MessagesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $message = Message::FindOrFail($id);
+        $message->delete();
+        return redirect()->route('messages.index')->with('success', 'Message deleted successfully.');
     }
 }
