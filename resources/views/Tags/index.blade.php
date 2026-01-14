@@ -1,4 +1,4 @@
-@extends('backlayout2')@extends('backlayout2')
+@extends('backlayout2')
 
 
 @section('content')
