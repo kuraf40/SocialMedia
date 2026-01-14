@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class TagsController extends Controller
 {
@@ -11,7 +12,8 @@ class TagsController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('tags.index', compact('tags'));
     }
 
     /**
@@ -19,7 +21,7 @@ class TagsController extends Controller
      */
     public function create()
     {
-        //
+        return view('tags.create');
     }
 
     /**
@@ -27,7 +29,7 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -35,7 +37,8 @@ class TagsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $tag = Tag::FindOrFail($id);
+        return view('tags.show', compact('tag'));
     }
 
     /**
@@ -43,7 +46,8 @@ class TagsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $tag = Tag::FindOrFail($id);
+        return view('tags.edit',compact('tag'));
     }
 
     /**
@@ -59,6 +63,8 @@ class TagsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tag = Tag::FindOrFail($id);
+        $tag->delete();
+        return redirect()->route('tags.index')->with('success', 'Type de média supprimé avec succès.');;
     }
 }
