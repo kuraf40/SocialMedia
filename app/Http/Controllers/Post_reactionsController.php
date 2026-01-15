@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PostReaction;
 use Illuminate\Http\Request;
 
 class Post_reactionsController extends Controller
@@ -11,7 +12,8 @@ class Post_reactionsController extends Controller
      */
     public function index()
     {
-        //
+        $post_reactions = PostReaction::all();
+        return view('post_reactions.index', compact('post_reactions'));
     }
 
     /**
@@ -19,7 +21,7 @@ class Post_reactionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('post_reactions.create');
     }
 
     /**
@@ -27,7 +29,13 @@ class Post_reactionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'post_id' => 'required|integer|exists:posts,id',
+            'reaction_id' => 'required|integer|exists:reactions,id',
+        ]);
+        $post_reaction = PostReaction::create($validated);
+        return redirect()->route('post_reactions.index')->with('success', 'Post-Reaction association created successfully.');
     }
 
     /**
@@ -35,7 +43,8 @@ class Post_reactionsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post_reaction = PostReaction::findOrFail($id);
+        return view('post_reactions.show', compact('post_reaction'));
     }
 
     /**
@@ -43,7 +52,8 @@ class Post_reactionsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post_reaction = PostReaction::findOrFail($id);
+        return view('post_reactions.edit', compact('post_reaction'));
     }
 
     /**
@@ -51,7 +61,14 @@ class Post_reactionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'post_id' => 'required|integer|exists:posts,id',
+            'reaction_id' => 'required|integer|exists:reactions,id',
+        ]);
+        $post_reaction = PostReaction::findOrFail($id);
+        $post_reaction->update($validated);
+        return redirect()->route('post_reactions.index')->with('success', 'Post-Reaction association updated successfully.');
     }
 
     /**
@@ -59,6 +76,8 @@ class Post_reactionsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post_reaction = PostReaction::findOrFail($id);
+        $post_reaction->delete();
+        return redirect()->route('post_reactions.index')->with('success', 'Post-Reaction association deleted successfully.');
     }
 }

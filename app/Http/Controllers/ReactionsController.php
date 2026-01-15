@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reaction;
 
 class ReactionsController extends Controller
 {
@@ -11,7 +12,8 @@ class ReactionsController extends Controller
      */
     public function index()
     {
-        //
+        $reactions = Reaction::all();
+        return view('reactions.index', compact('reactions'));
     }
 
     /**
@@ -19,7 +21,7 @@ class ReactionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('reactions.create');
     }
 
     /**
@@ -27,7 +29,11 @@ class ReactionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validared = $request->validate([
+            'nom' => 'required|string',
+        ]);
+        $reaction = Reaction::create($validared);
+        return redirect()->route('reactions.index')->with('success', 'Reaction created successfully.');
     }
 
     /**
@@ -35,7 +41,8 @@ class ReactionsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $reaction = Reaction::findOrFail($id);
+        return view('reactions.show', compact('reaction'));
     }
 
     /**
@@ -43,7 +50,8 @@ class ReactionsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reaction = Reaction::findOrFail($id);
+        return view('reactions.edit', compact('reaction'));
     }
 
     /**
@@ -51,7 +59,12 @@ class ReactionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string',
+        ]);
+        $reaction = Reaction::findOrFail($id);
+        $reaction->update($validated);
+        return redirect()->route('reactions.index')->with('success', 'Reaction updated successfully.');
     }
 
     /**
@@ -59,6 +72,8 @@ class ReactionsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $reaction = Reaction::findOrFail($id);
+        $reaction->delete();
+        return redirect()->route('reactions.index')->with('success', 'Reaction deleted successfully.');
     }
 }

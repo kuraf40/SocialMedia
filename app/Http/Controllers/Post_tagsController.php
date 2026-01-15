@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PostTag;
 
 class Post_tagsController extends Controller
 {
@@ -11,7 +12,8 @@ class Post_tagsController extends Controller
      */
     public function index()
     {
-        //
+        $post_tags = PostTag::all();
+        return \view('post_tags.index', compact('post_tags'));
     }
 
     /**
@@ -19,7 +21,7 @@ class Post_tagsController extends Controller
      */
     public function create()
     {
-        //
+        return view('post_tags.create');
     }
 
     /**
@@ -27,7 +29,13 @@ class Post_tagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'post_id' => 'required|integer|exists:posts,id',
+            'tag_id' => 'required|integer|exists:tags,id',
+        ]);
+
+        $post_tag = PostTag::create($validated);
+        return redirect()->route('post_tags.index')->with('success', 'Post-Tag association created successfully.');
     }
 
     /**
@@ -35,7 +43,8 @@ class Post_tagsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post_tag = PostTag::findOrFail($id);
+        return view('post_tags.show', compact('post_tag'));
     }
 
     /**
@@ -43,7 +52,8 @@ class Post_tagsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post_tag = PostTag::findOrFail($id);
+        return view('post_tags.edit', compact('post_tag'));
     }
 
     /**
@@ -51,7 +61,15 @@ class Post_tagsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'post_id' => 'required|integer|exists:posts,id',
+            'tag_id' => 'required|integer|exists:tags,id',
+        ]);
+
+        $post_tags = PostTag::findOrFail($id);
+        $post_tags->update($validated);
+
+        return redirect()->route('post_tags.index')->with('success', 'Post-Tag association updated successfully.'); 
     }
 
     /**
@@ -59,6 +77,9 @@ class Post_tagsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post_tag = PostTag::findOrFail($id);
+        $post_tag->delete();
+
+        return redirect()->route('post_tags.index')->with('success', 'Post-Tag association deleted successfully.');
     }
 }

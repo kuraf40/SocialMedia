@@ -29,7 +29,14 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $validated = $request->validate([
+            'nom' => 'required|string',
+            'created_at' => 'required|date',
+            'update_at' => 'required|date'
+        ]);
+        $tag = Tag::create($validated);
+        return redirect()->route('tags.index', $tag->id)->with('Tag cree avec succes');
+
     }
 
     /**
@@ -55,7 +62,12 @@ class TagsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string',
+        ]);
+        $tag = Tag::FindOrFail($id);
+        $tag ->update($validated);
+        return redirect()->route('tags.index',$tag->id )->with('succes','Tag modifie');
     }
 
     /**
