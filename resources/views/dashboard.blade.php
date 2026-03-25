@@ -1,6 +1,5 @@
 @extends('backlayout2')
-
-@section('content')
+ @section('content')
   
             <div class="container-fluid p-4 p-lg-5">
                 <!-- Page Header -->
@@ -45,7 +44,7 @@
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-0 text-muted">Total Users</h6>
-                                        <h3 class="mb-0" >12,426</h3>
+                                        <h3 class="mb-0" ></h3>
                                         <small class="text-success">
                                             
                                         </small>
@@ -66,7 +65,7 @@
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-0 text-muted">Total Posts</h6>
-                                        <h3 class="mb-0">$54,320</h3>
+                                        <h3 class="mb-0"></h3>
                                         <small class="text-success">
 
                                         </small>
@@ -87,7 +86,7 @@
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-0 text-muted">Total Medias</h6>
-                                        <h3 class="mb-0">1,852</h3>
+                                        <h3 class="mb-0"></h3>
                                         <small class="text-danger">
                                             
                                         </small>
@@ -108,7 +107,7 @@
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-0 text-muted">Total Commentaires</h6>
-                                        <h3 class="mb-0">2.3s</h3>
+                                        <h3 class="mb-0"></h3>
                                         <small class="text-success">
                                             
                                         </small>
@@ -261,4 +260,4 @@
 
             </div>
     
-@endsection
+@endsection 
