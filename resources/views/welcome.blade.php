@@ -3,4 +3,4 @@
 
 <p>Welcome to our application!</p>
 
-<a href="{{ route('dashboard') }}"><strong> Go to admin's dashboard   </strong></a>
+<a href="{{ route('dashboard') }}"><strong> Go to fucking admin's dashboard   </strong></a>
