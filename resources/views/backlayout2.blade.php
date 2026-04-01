@@ -297,26 +297,9 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="bi bi-graph-up"></i>
-                                <span>Analytics</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="bi bi-ui-checks"></i>
-                                <span>Forms</span>
-                                <span class="badge bg-success rounded-pill ms-auto">New</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="bi bi-file-earmark-text"></i>
-                                <span>Reports</span>
-                            </a>
-                        </li>
+                        
+                        
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="">
                                 <i class="bi bi-chat-dots"></i>

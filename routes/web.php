@@ -18,14 +18,12 @@ use App\Http\Controllers\LanguesController;
 use App\Http\Controllers\Post_translationsController;
 use App\Http\Controllers\Comment_translationsController;
 
-
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::middleware(['auth'])->group(function () {
 
 Route::resource('users', UsersController::class);
 Route::resource('medias', MediasController::class);
@@ -43,9 +41,14 @@ Route::resource('comment_reactions', Comment_reactionsController::class);
 Route::resource('langues', LanguesController::class);
 Route::resource('post_translations', Post_translationsController::class);
 Route::resource('comment_translations', Comment_translationsController::class);
+//Route::get('/feed', [PostsController::class, 'feed'])->name('feed');
 
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
+require __DIR__.'/auth.php';

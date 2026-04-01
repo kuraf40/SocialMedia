@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -79,5 +81,19 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post supprimé avec succès.');
+    }
+
+    public function feed()
+    {
+       $user = Auth::user();
+       $posts = Post::whereIn('auteur_id', function($query) use ($user) {
+           $query->select('followed_id')
+                 ->from('follows')
+                 ->where('follower_id', $user->id);
+       })->orWhere('auteur_id', $user->id)
+       ->with('user')
+       ->latest()
+       ->paginate(10);
+       return response()->json($posts);
     }
 }
