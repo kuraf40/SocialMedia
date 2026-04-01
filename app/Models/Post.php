@@ -47,6 +47,7 @@ class Post extends Model
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'auteur_id');
+		
 	}
 
 	public function media()
@@ -77,4 +78,5 @@ class Post extends Model
 	{
 		return $this->hasMany(PostTranslation::class);
 	}
+	
 }

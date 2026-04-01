@@ -137,44 +137,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Recent Activity</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="activity-feed">
-                                    <div class="activity-item">
-                                        <div class="activity-icon bg-primary bg-opacity-10 text-primary">
-                                            <i class="bi bi-person-plus"></i>
-                                        </div>
-                                        <div class="activity-content">
-                                            <p class="mb-1">New user registered</p>
-                                            <small class="text-muted">2 minutes ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="activity-item">
-                                        <div class="activity-icon bg-success bg-opacity-10 text-success">
-                                            <i class="bi bi-bag-check"></i>
-                                        </div>
-                                        <div class="activity-content">
-                                            <p class="mb-1">Order #1234 completed</p>
-                                            <small class="text-muted">5 minutes ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="activity-item">
-                                        <div class="activity-icon bg-warning bg-opacity-10 text-warning">
-                                            <i class="bi bi-exclamation-triangle"></i>
-                                        </div>
-                                        <div class="activity-content">
-                                            <p class="mb-1">Server maintenance scheduled</p>
-                                            <small class="text-muted">1 hour ago</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- Additional Charts Row -->
@@ -244,7 +207,7 @@
                     </div>
                 </div>
 
-                <!-- Sales by Location -->
+                <!-- Sales by Location 
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="card">
@@ -252,12 +215,18 @@
                                 <h5 class="card-title mb-0">Sales by Location</h5>
                             </div>
                             <div class="card-body">
-                                <div id="salesByLocationChart" style="min-height: 400px; width: 100%;"></div>
+                                <div id="salesByLocationChart" style="min-height: 400px; width: 100%;"></div> 
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
+
+
+
+
+
+            
     
 @endsection 
